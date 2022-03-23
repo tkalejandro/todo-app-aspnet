@@ -10,8 +10,8 @@ using todo_app_aspnet.Models;
 
 namespace todo_app_aspnet.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+    [Route("api/TodoItems")]
+    [ApiController] //? This means it respond to API request
     public class TodoItemsController : ControllerBase
     {
         private readonly TodoContext _context;
@@ -81,7 +81,9 @@ namespace todo_app_aspnet.Controllers
             _context.TodoItems.Add(todoItem);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
+            //return CreatedAtAction("GetTodoItem", new { id = todoItem.Id }, todoItem);
+            //? This one is not hard coded.
+            return CreatedAtAction(nameof(GetTodoItem), new { id = todoItem.Id }, todoItem);
         }
 
         // DELETE: api/TodoItems/5
